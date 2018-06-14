@@ -1,4 +1,5 @@
 <?php
+use Google\Cloud\Datastore\DatastoreClient;
 
 class TrustProjectDomains {
 	
@@ -32,8 +33,7 @@ class TrustProjectDomains {
 	}
 	
 	private function init_datastore() {
-		if ( !$this->datasource ) {
-			use Google\Cloud\Datastore\DatastoreClient;
+		if ( !$this->datastore ) {
 			$this->datastore = new DatastoreClient();
 		}
 		
