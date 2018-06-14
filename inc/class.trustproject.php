@@ -2,10 +2,13 @@
 
 class TrustProjectDomains {
 	
+	private $datastore;
+	
 	public function verify( $domain ) {
 		if ( !$this->validate( $domain ) ) {
 			return false;
 		}
+		$this->query_domain( $domain );
 		return true;
 	}
 	
@@ -19,4 +22,20 @@ class TrustProjectDomains {
 				&& preg_match( "/^.{1,253}$/", $domain ) //overall length check
 				&& preg_match( "/^[^\.]{1,63}(\.[^\.]{1,63})*$/", $domain ) ); //length of each label
 	}	
+	
+	private function query_domain( $domain ) {
+		$this->init_datastore();
+		$key = $this->datastore->key( 'Domain', $domain );
+		$result = $this->datastore->lookup( $key );
+		print_r( $domain);
+		die;
+	}
+	
+	private function init_datastore() {
+		if ( !$this->datasource ) {
+			use Google\Cloud\Datastore\DatastoreClient;
+			$this->datastore = new DatastoreClient();
+		}
+		
+	}
 }
