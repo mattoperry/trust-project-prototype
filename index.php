@@ -14,7 +14,7 @@ dispatch('/v1/verify/:domain', function( $domain ) {
 			'domain' => $domain,
 			'verified'	=> $TPDomains->verify( $domain ),
 		)
-	);	
+	);
 } );
 
 /** go **/

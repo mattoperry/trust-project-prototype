@@ -1,5 +1,4 @@
 <?php
-use Google\Cloud\Datastore\DatastoreClient;
 
 class TrustProjectDomains {
 	
@@ -10,8 +9,8 @@ class TrustProjectDomains {
 		if ( !$this->validate( $domain ) ) {
 			return false;
 		}
-		$this->query_domain( $domain );
-		return true;
+		$domain_result = $this->query_domain( $domain );
+		return ( is_null( $domain_result ) ) ? false : true;
 	}
 	
 	//checks if the domain is well-formed
@@ -28,14 +27,12 @@ class TrustProjectDomains {
 	private function query_domain( $domain ) {
 		$this->init_datastore();
 		$key = $this->datastore->key( 'Domain', $domain );
-		$result = $this->datastore->lookup( $key );
-		print_r( $domain);
-		die;
+		return $this->datastore->lookup( $key );
 	}
 	
 	private function init_datastore() {
 		if ( !$this->datastore ) {
-			$this->datastore = new DatastoreClient( $this->google_project_id );
+			$this->datastore = new Google\Cloud\Datastore\DatastoreClient( array( 'projectId' => $this->google_project_id ) );
 		}
 	}
 }
