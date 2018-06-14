@@ -35,7 +35,7 @@ class TrustProjectDomains {
 	
 	private function init_datastore() {
 		if ( !$this->datastore ) {
-			$this->datastore = new DatastoreClient( $this->$google_project_id );
+			$this->datastore = new DatastoreClient( $this->google_project_id );
 		}
 	}
 }
