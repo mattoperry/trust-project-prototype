@@ -1,5 +1,5 @@
 <?php
-require( 'vendor/autoload.php' );
+require_once( 'vendor/autoload.php' );
 require_once( 'vendor/limonade/lib/limonade.php' );
 require_once( 'inc/class.trustproject.php');
 

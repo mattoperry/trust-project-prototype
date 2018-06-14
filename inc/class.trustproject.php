@@ -4,6 +4,7 @@ use Google\Cloud\Datastore\DatastoreClient;
 class TrustProjectDomains {
 	
 	private $datastore;
+	private $google_project_id = 'trust-project-prototype';
 	
 	public function verify( $domain ) {
 		if ( !$this->validate( $domain ) ) {
@@ -34,8 +35,7 @@ class TrustProjectDomains {
 	
 	private function init_datastore() {
 		if ( !$this->datastore ) {
-			$this->datastore = new DatastoreClient();
+			$this->datastore = new DatastoreClient( $this->$google_project_id );
 		}
-		
 	}
 }
